@@ -8,8 +8,17 @@ public:
             return;
         }
 
-        if(leftParan < n ) helper(s,leftParan+1, rightParan, n, ans + "(");
-        if(rightParan < leftParan) helper(s, leftParan, rightParan+1, n, ans + ")");
+        if(leftParan < n )
+        {
+            // ans.push_back('(');
+            helper(s, leftParan+1, rightParan, n, ans + "(");
+            
+        }
+        if( rightParan < leftParan)
+        {
+            // ans.push_back(')');
+            helper(s, leftParan, rightParan+1, n, ans + ")");
+        }
     }
     vector<string> generateParenthesis(int n) {
         vector<string> s;
