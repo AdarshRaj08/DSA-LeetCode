@@ -1,20 +1,18 @@
 class Solution {
 public:
-    int helper(int n, vector<int>&dp)
-    {
+    vector<int> dp; 
+    int fib(int n) {
+        // create dp only once 
+        if(dp.empty())
+            dp.resize(n+1,-1);
         if(n == 0 || n == 1)
             return n;
         
         if(dp[n] != -1)
             return dp[n];
         
-        dp[n] = helper(n-1,dp) + helper(n-2,dp);
+        dp[n] = fib(n-1) + fib(n-2);
 
         return dp[n];
-    }
-    int fib(int n) {
-        vector<int> dp(n+1,-1); 
-        
-        return helper(n,dp);
     }
 };
