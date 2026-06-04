@@ -5,10 +5,10 @@ public:
         int n = nums.size();
         for(int i=0; i<n; i++)
         {
-            int findnum = target-nums[i];
-            if(mp.find(findnum) != mp.end(findnum))
+            int remaining = target-nums[i];
+            if(mp.find(remaining) != mp.end(remaining))
             {
-                return {i,mp[findnum]};
+                return {i,mp[remaining]};
             }
             mp[nums[i]] = i;
         }
