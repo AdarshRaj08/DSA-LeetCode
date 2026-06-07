@@ -15,20 +15,16 @@ public:
             }
         }
 
+        bool flip = true;
         for(auto &i : mp)
         {
-            if(i.first % 2 == 0)
-            {
+            if(flip)
                 reverse(i.second.begin(),i.second.end());
-            }
-        }
-
-        for(auto &i : mp)
-        {
+            
             for(auto j : i.second)
-            {
                 ans.push_back(j);
-            }
+
+            flip = !flip;
         }
 
         return ans;
