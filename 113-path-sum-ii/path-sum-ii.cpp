@@ -12,7 +12,7 @@
 class Solution {
 public:
     vector<vector<int>> result;
-    void tempfunc(TreeNode* node, vector<int>sum,int addsum, int targetSum)
+    void tempfunc(TreeNode* node, vector<int>&sum,int addsum, int targetSum)
     {
         if(node == NULL) return;
 
@@ -22,13 +22,17 @@ public:
         {
             if(addsum == targetSum)
                 result.push_back(sum);
+                sum.pop_back();
+                return;
         }
         tempfunc(node->left, sum,addsum, targetSum);
         tempfunc(node->right,sum,addsum, targetSum);
+        sum.pop_back();
         return;
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        tempfunc(root,{},0,targetSum);
+        vector<int>path;
+        tempfunc(root,path,0,targetSum);
         return result;
     }
 };
