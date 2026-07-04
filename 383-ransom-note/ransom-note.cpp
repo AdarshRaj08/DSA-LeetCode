@@ -4,6 +4,9 @@ public:
         int arr1[26] = {0};
         int n1 = ransomNote.length();
         int n2 = magazine.length();
+
+        if(n1 > n2)
+            return false;
         
 
         for(int i=0; i<n2; i++)
