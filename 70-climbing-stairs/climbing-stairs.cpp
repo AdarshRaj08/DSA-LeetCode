@@ -1,12 +1,26 @@
 class Solution {
 public:
-    int climbStairs(int n) {
-        vector<int>dp(n+1,-1);
-        dp[0]=1;
-        dp[1]=1;
-        for(int i=2;i<=n;i++){
-            dp[i]=dp[i-1]+dp[i-2];
+    int waysfind(int n, vector<int>& bank){
+        if(n == 0){
+            return 1;
         }
-        return dp[n];
+        if(n < 0){
+            return 0;
+        }
+
+        if(bank[n] != -1){
+            return bank[n];
+        }
+        int step1 = waysfind(n-1,bank);
+        int step2 = waysfind(n-2,bank);
+        // int step3 = waysfind(n-3,bank);
+        int totalWays = step1 + step2;
+        bank[n] = totalWays;
+        return totalWays;
+    }
+
+    int climbStairs(int n) {
+        vector<int> bank(n+1, -1);
+        return waysfind(n,bank);
     }
 };
