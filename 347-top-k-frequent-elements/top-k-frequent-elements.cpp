@@ -8,12 +8,22 @@ public:
             mp[nums[i]]++;
         }
 
-        priority_queue<pair<int,int>> pq;
+        priority_queue<
+            pair<int,int>,
+            vector<pair<int,int>>,
+            greater<pair<int,int>>
+        > pq;
 
-        for(auto &p : mp)
+        for(auto &p : mp){
             pq.push({p.second, p.first});
 
-        for(int i=0; i<k; i++){
+
+            if(pq.size() > k){
+                pq.pop();
+            }
+        }
+
+        while(!pq.empty()){
             topKelement.push_back(pq.top().second);
             pq.pop();
         }
