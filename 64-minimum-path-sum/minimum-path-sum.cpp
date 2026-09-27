@@ -1,30 +1,31 @@
 class Solution {
 public:
-    // solving by tabulation method
+    int helper(int& m, int&n,vector<vector<int>>&grid, vector<vector<int>>&dp, int row, int col){
+        if(row == m-1 && col == n-1){
+            return grid[row][col];
+        }
+        if(row == m || col == n){
+            return INT_MAX;
+        }
+        
 
-    int minPathSum(vector<vector<int>>& grid) {
-        int row = grid.size();
-        int col = grid[0].size();
-
-        vector<vector<int>> dp(row, vector<int>(col, -1));
-
-        for(int i=0; i<row; i++){
-            for(int j=0; j<col; j++){
-                if(i==0 && j==0){
-                    dp[i][j] = grid[i][j];
-                }
-                else if(i==0){
-                    dp[i][j] = dp[i][j-1] + grid[i][j];
-                }
-                else if(j==0){
-                    dp[i][j] = dp[i-1][j] + grid[i][j];
-                }
-                else{
-                    dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1]);
-                }
-            }
+        if(dp[row][col] != -1){
+            return dp[row][col];
         }
 
-        return dp[row-1][col-1];
+        dp[row][col] = grid[row][col] + min(helper(m,n,grid,dp,row+1,col), helper(m,n, grid,dp, row,col+1));
+
+        return dp[row][col];
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        vector<vector<int>> dp(m, vector<int>(n, -1));
+
+
+        
+
+        return helper(m,n,grid,dp,0,0);
     }
 };
