@@ -1,23 +1,24 @@
 class Solution {
 public:
-    int helper(int m, int n, vector<vector<int>>&dp) {
-        if(m == 0 || n == 0){
+    // applying recursion from (0,0) to goal
+
+    int helper(int& m, int& n, vector<vector<int>>&dp, int row, int col){
+        if(row == m-1 || col == n-1){
             return 1;
         }
-        if(dp[m][n] != -1){
-            return dp[m][n];
-        }
-        
 
-        return dp[m][n] = helper(m, n-1,dp) + helper(m-1, n,dp);
+        if(dp[row][col] != -1){
+            return dp[row][col];
+        }
+
+
+        return dp[row][col] = helper(m,n,dp, row+1, col) + helper(m,n,dp, row, col+1);
     }
 
-    int uniquePaths(int m, int n){
-        // vector<m,vector<int>(n,-1)>dp;
-        vector<vector<int>> dp(m+1, vector<int>(n+1,-1));
+    int uniquePaths(int m, int n) {
+        vector<vector<int>>dp(m, vector<int>(n,-1));
 
-        return helper(m-1,n-1,dp);
+        return helper(m,n,dp, 0, 0);
 
-        
     }
 };
