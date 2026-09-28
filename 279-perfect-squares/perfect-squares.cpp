@@ -14,7 +14,7 @@ public:
                 dp[i] = 1;
             }
             else{
-                for(int j=1; j*j<=i; j++){
+                for(int j=1; j*j<=i/2; j++){
                     int count = dp[j*j] + dp[i-(j*j)];
                     minn = min(count,minn);
                 }
