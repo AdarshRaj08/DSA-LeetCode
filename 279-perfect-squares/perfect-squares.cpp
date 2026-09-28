@@ -5,25 +5,23 @@ public:
 
         return root*root == n;
     }
-
-    int helper(int n, vector<int>&dp){
-        if(isPerfectSquare(n))
-            return 1;
-        if(dp[n] != -1)
-            return dp[n];
-        int ans = n;
-
-        for(int i=1; i*i<=n/2; i++){
-            int count = helper(i*i,dp) + helper(n-(i*i),dp);
-
-            ans = min(ans,count);
-        }
-        
-        return dp[n] = ans;
-    }
-
     int numSquares(int n) {
-        vector<int>dp(n+1,-1);
-        return helper(n,dp);
+        vector<int>dp(n+1,0);
+
+        for(int i=1; i<=n; i++){
+            int minn = i;
+            if(isPerfectSquare(i)){
+                dp[i] = 1;
+            }
+            else{
+                for(int j=1; j*j<=i; j++){
+                    int count = dp[j*j] + dp[i-(j*j)];
+                    minn = min(count,minn);
+                }
+            dp[i] = minn;
+            }
+        }
+        return dp[n];
+
     }
 };
