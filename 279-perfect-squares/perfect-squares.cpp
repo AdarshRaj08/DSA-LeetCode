@@ -9,7 +9,7 @@ public:
         vector<int>dp(n+1,0);
 
         for(int i=1; i<=n; i++){
-            int minn = i;
+            int minn = INT_MAX;
             if(isPerfectSquare(i)){
                 dp[i] = 1;
             }
@@ -18,7 +18,7 @@ public:
                     int count = dp[j*j] + dp[i-(j*j)];
                     minn = min(count,minn);
                 }
-            dp[i] = minn;
+                dp[i] = minn;
             }
         }
         return dp[n];
