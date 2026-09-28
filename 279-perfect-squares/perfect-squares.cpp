@@ -9,7 +9,7 @@ public:
         vector<int>dp(n+1,0);
 
         for(int i=1; i<=n; i++){
-            int minn = INT_MAX;
+            int minn = i;
             if(isPerfectSquare(i)){
                 dp[i] = 1;
             }
