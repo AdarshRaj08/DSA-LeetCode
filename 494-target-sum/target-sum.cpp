@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int helper(vector<int>& nums,int& target, int idx, int sum, vector<vector<int>>&dp){
+    int helper(vector<int>& nums,int target, int idx, int sum, vector<vector<int>>&dp){
         if(idx == nums.size()){
-            if(sum == target){
+            if(target == 0){
                 return 1;
             }
             else{
@@ -10,12 +10,12 @@ public:
             }
         }
 
-        // if(dp[idx][target-sum] != -1){
+        // if(dp[idx][(target-sum) + sum] != -1){
         //     return dp[idx][target-sum];
         // }
 
-        int minus = helper(nums, target, idx+1, sum-nums[idx], dp);
-        int add   = helper(nums, target, idx+1, sum+nums[idx], dp); 
+        int minus = helper(nums, target-nums[idx], idx+1, sum, dp);
+        int add   = helper(nums, target+nums[idx], idx+1, sum, dp); 
         // dp[idx][sum] = minus + add;
         return minus + add;
     }
@@ -25,8 +25,8 @@ public:
         int sum = 0;
         for(int i=0; i<n; i++){
             sum += nums[i];
-        }
-        vector<vector<int>>dp(n, vector<int>(sum+1,-1));
-        return helper(nums,target,0,0,dp);
+        }   
+        vector<vector<int>>dp(n, vector<int>(2*sum,-1));
+        return helper(nums,target,0,sum,dp);
     }
 };
